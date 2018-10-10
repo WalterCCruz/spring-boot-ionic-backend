@@ -1,15 +1,27 @@
 package com.waltercruz.cursomc.domain;
 
+
+import com.sun.javafx.geom.transform.Identity;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
 /*Serializable permite que seus objetos sejam convertidos para uma sequencia de bytes e assim possam ser gravados, trafegar na rede e ect.*/
+@Entity
 public class Categoria implements Serializable {
 
-   private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+
     private String nome;
 
 
@@ -29,7 +41,7 @@ public class Categoria implements Serializable {
         this.nome = nome;
     }
 
-    public Categoria (){
+    public Categoria() {
 
     }
 
