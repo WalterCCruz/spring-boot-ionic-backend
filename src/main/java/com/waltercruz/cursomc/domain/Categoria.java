@@ -3,11 +3,10 @@ package com.waltercruz.cursomc.domain;
 
 import com.sun.javafx.geom.transform.Identity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /*Serializable permite que seus objetos sejam convertidos para uma sequencia de bytes e assim possam ser gravados, trafegar na rede e ect.*/
@@ -21,9 +20,21 @@ public class Categoria implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     private String nome;
 
+    @ManyToMany(mappedBy = "categorias")
+    private List<Produto> produtos = new ArrayList<>();
+
+
+
+    /*Segundo a especificacao o List ficará fora do construtor*/
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
 
     public Integer getId() {
         return id;
