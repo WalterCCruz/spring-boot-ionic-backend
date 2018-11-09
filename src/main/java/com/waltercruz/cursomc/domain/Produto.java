@@ -1,5 +1,6 @@
 package com.waltercruz.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 
 import javax.persistence.*;
@@ -23,6 +24,8 @@ public class Produto implements Serializable {
     private Double valor;
 
     /*Segundo a especificacao o List ficará fora do construtor*/
+    /*@JsonBackReference ele irá omitir a lista de categorias para cada produto*/
+    @JsonBackReference
     @ManyToMany
     @JoinTable(name = "PRODUTO_CATEGORIA",
             joinColumns = @JoinColumn(name = "produto_id"),

@@ -1,6 +1,7 @@
-package com.waltercruz.cursomc.Services;
+package com.waltercruz.cursomc.services;
 
 
+import com.waltercruz.cursomc.services.exception.ObjectNotFoundException;
 import com.waltercruz.cursomc.domain.Categoria;
 import com.waltercruz.cursomc.repositories.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,9 @@ public class CategoriaService {
     private CategoriaRepository categoriaRepository;
 
 
-    public Categoria buscar (Integer id){
+    public Categoria buscar (Integer id) {
         Optional<Categoria> obj = categoriaRepository.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(
+                "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
     }
-
-
-
 }

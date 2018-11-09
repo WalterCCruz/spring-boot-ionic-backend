@@ -1,6 +1,7 @@
 package com.waltercruz.cursomc.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.javafx.geom.transform.Identity;
 
 import javax.persistence.*;
@@ -22,6 +23,8 @@ public class Categoria implements Serializable {
 
     private String nome;
 
+    /*@JsonManagedReference serve para tratar a referencia ciclica - ir na categoria pegar os produtos, ir nos produtos e pegar as categorias em loop*/
+    @JsonManagedReference
     @ManyToMany(mappedBy = "categorias")
     private List<Produto> produtos = new ArrayList<>();
 

@@ -1,6 +1,6 @@
 package com.waltercruz.cursomc.resources;
 
-import com.waltercruz.cursomc.Services.CategoriaService;
+import com.waltercruz.cursomc.services.CategoriaService;
 import com.waltercruz.cursomc.domain.Categoria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
