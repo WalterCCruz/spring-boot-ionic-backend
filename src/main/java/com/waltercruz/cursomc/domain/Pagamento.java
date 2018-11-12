@@ -2,15 +2,23 @@ package com.waltercruz.cursomc.domain;
 
 import com.waltercruz.cursomc.domain.Enums.EstadoPagamento;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+
+@Entity
 public class Pagamento {
 
     private static final long serialVersionUID = 1L;
 
-
+    @Id
     private Integer id;
     private EstadoPagamento estado;
+
+    /*@MapsId para que o Id do pagamento seja o mesmo do id do pedido*/
+    @OneToOne
+    @JoinColumn(name = "pedido_id")
+    @MapsId
     private Pedido pedido;
 
 
