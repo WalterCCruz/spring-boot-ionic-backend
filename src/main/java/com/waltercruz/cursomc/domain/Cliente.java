@@ -33,6 +33,11 @@ public class Cliente {
     private Set<String>telefones = new HashSet<>();
 
 
+    private List<Pedido> pedidos =  new ArrayList<>();
+
+
+
+
     public Cliente(){
 
     }
