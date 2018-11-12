@@ -50,6 +50,13 @@ public class Cliente {
         this.tipo = tipo.getCod();
     }
 
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
 
     public Integer getId() {
         return id;

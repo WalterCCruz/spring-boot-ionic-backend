@@ -1,8 +1,11 @@
 package com.waltercruz.cursomc.domain;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Pedido {
+
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
     private Date instant;
@@ -23,5 +26,60 @@ public class Pedido {
         this.pagamento = pagamento;
         this.cliente = cliente;
         this.enderecoDeEntrega = enderecoDeEntrega;
+    }
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getInstant() {
+        return instant;
+    }
+
+    public void setInstant(Date instant) {
+        this.instant = instant;
+    }
+
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Endereco getEnderecoDeEntrega() {
+        return enderecoDeEntrega;
+    }
+
+    public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
+        this.enderecoDeEntrega = enderecoDeEntrega;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pedido pedido = (Pedido) o;
+        return Objects.equals(id, pedido.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
