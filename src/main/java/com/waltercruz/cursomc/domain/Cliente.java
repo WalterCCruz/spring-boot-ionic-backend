@@ -32,7 +32,7 @@ public class Cliente {
     @CollectionTable(name = "telefone")
     private Set<String>telefones = new HashSet<>();
 
-
+    @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos =  new ArrayList<>();
 
 

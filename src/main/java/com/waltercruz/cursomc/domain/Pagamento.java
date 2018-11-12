@@ -6,14 +6,16 @@ import javax.persistence.*;
 import java.util.Objects;
 
 
+/*Inheritance mapeamento e herança da superclasse*/
 @Entity
-public class Pagamento {
+@Inheritance(strategy = InheritanceType.JOINED)
+public  abstract class Pagamento {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     private Integer id;
-    private EstadoPagamento estado;
+    private Integer estado;
 
     /*@MapsId para que o Id do pagamento seja o mesmo do id do pedido*/
     @OneToOne
@@ -29,7 +31,7 @@ public class Pagamento {
 
     public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
         this.id = id;
-        this.estado = estado;
+        this.estado = estado.getCod();
         this.pedido = pedido;
     }
 
@@ -43,11 +45,11 @@ public class Pagamento {
     }
 
     public EstadoPagamento getEstado() {
-        return estado;
+        return EstadoPagamento.toEnum(estado);
     }
 
     public void setEstado(EstadoPagamento estado) {
-        this.estado = estado;
+        this.estado = estado.getCod();
     }
 
     public Pedido getPedido() {
