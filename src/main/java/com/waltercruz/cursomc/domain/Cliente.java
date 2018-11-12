@@ -2,25 +2,35 @@ package com.waltercruz.cursomc.domain;
 
 import com.waltercruz.cursomc.domain.Enums.TipoCliente;
 
+import javax.persistence.*;
 import java.util.*;
 
+@Entity
 public class Cliente {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private String email;
     private String cpfOuCnpj;
     private Integer tipo;
+
+    @OneToMany(mappedBy = "cliente")
     private List<Endereco>enderecos = new ArrayList<>();
 
 
     /*Set é um tipo de lista que não permite repeticao*/
+    /* @ElementCollection para ser mapeado como uma entidade fraca*/
+    /* @CollectionTable para criar a tabela auxiliar para guardar o telefone*/
+    @ElementCollection
+    @CollectionTable(name = "telefone")
     private Set<String>telefones = new HashSet<>();
 
 
-    public Cliente (){
+    public Cliente(String mAria_silva, String s, String s1, TipoCliente pessoafisica){
 
     }
 
