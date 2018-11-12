@@ -1,5 +1,6 @@
 package com.waltercruz.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 
 import javax.persistence.*;
@@ -18,6 +19,9 @@ public class Endereco {
     private String complemento;
     private String cep;
 
+
+    /*@JsonBackReference Aqui estou dizendo que o endereço não pode serializaro cliente*/
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="cliente_id")
     private Cliente cliente;

@@ -1,5 +1,6 @@
 package com.waltercruz.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.waltercruz.cursomc.domain.Enums.TipoCliente;
 
 import javax.persistence.*;
@@ -18,6 +19,8 @@ public class Cliente {
     private String cpfOuCnpj;
     private Integer tipo;
 
+    /*@JsonManagedReference serve para tratar a referencia ciclica - ir na cliente pegar os enderecos, ir nos enderecos e pegar os clientes em loop*/
+    @JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private List<Endereco>enderecos = new ArrayList<>();
 
@@ -30,7 +33,7 @@ public class Cliente {
     private Set<String>telefones = new HashSet<>();
 
 
-    public Cliente(String mAria_silva, String s, String s1, TipoCliente pessoafisica){
+    public Cliente(){
 
     }
 
