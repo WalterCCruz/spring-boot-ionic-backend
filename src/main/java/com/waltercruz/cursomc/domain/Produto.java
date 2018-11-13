@@ -33,6 +33,7 @@ public class Produto implements Serializable {
 
     /*Prorio Set me garanta que não tenha item repetido*/
     @OneToMany(mappedBy = "id.produto")
+    @JsonIgnore
     private Set<ItemPedido> itens = new HashSet<>();
 
     @JsonIgnore

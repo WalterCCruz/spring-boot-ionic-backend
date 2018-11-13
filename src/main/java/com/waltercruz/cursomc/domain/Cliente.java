@@ -1,5 +1,6 @@
 package com.waltercruz.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.waltercruz.cursomc.domain.Enums.TipoCliente;
 
@@ -32,6 +33,8 @@ public class Cliente {
     @CollectionTable(name = "telefone")
     private Set<String>telefones = new HashSet<>();
 
+    /*Os pedidos de um cliente nao serao serializados - tratamento referencia ciclica*/
+    @JsonBackReference
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos =  new ArrayList<>();
 

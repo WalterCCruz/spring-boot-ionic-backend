@@ -13,6 +13,7 @@ public class ItemPedido {
 
     /*Atributo composto*/
     /*@EmbeddedId para u m id embutido em um metodo auxiliar*/
+    /*@JsonIgnore nao serializar*/
     @JsonIgnore
     @EmbeddedId
     private ItemPedidoPK id = new ItemPedidoPK();
@@ -36,9 +37,11 @@ public class ItemPedido {
     }
 
 
+    @JsonIgnore
     public Pedido getPedido(){
         return id.getPedido();
     }
+
 
     public Produto getProduto(){
         return id.getProduto();

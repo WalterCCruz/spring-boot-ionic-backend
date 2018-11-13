@@ -1,6 +1,7 @@
 package com.waltercruz.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,9 +20,13 @@ public class Pedido implements Serializable {
     @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     private Date instant;
 
+    /*Tratamento referencia ciclica -  permito que o pagamento seja serializado*/
+    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
     private Pagamento pagamento;
 
+    /*Tratamento referencia ciclica*/
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

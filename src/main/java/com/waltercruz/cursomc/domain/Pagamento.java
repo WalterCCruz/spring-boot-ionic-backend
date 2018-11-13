@@ -1,5 +1,6 @@
 package com.waltercruz.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.waltercruz.cursomc.domain.Enums.EstadoPagamento;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public  abstract class Pagamento {
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId
+    @JsonBackReference/*tratamento  -  nao permito que o pedido seja serializado*/
     private Pedido pedido;
 
 
