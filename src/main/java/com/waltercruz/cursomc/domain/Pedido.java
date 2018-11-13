@@ -2,8 +2,7 @@ package com.waltercruz.cursomc.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 
 @Entity
@@ -14,6 +13,7 @@ public class Pedido implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private Date instant;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
@@ -27,9 +27,25 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "endereco_de_entrega_id")
     private Endereco enderecoDeEntrega;
 
+    /*Prorio Set me garanta que não tenha item repetido*/
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<Endereco.ItemPedido> itens = new HashSet<>();
+
+
+    public List<Pedido>getPedidos(){
+        List<Pedido> list =  new ArrayList<>();
+        for(Endereco.ItemPedido x : itens){
+            list.add(x.getPedido());
+        }
+        return list;
+    }
+
+
+
     public Pedido (){
 
     }
+
 
     /*Retirado pagamento do construtor para que seja possivel instaciar o pagamento de forma individual ao pedido*/
     public Pedido(Integer id, Date instant, Cliente cliente, Endereco enderecoDeEntrega) {
@@ -80,6 +96,14 @@ public class Pedido implements Serializable {
         this.enderecoDeEntrega = enderecoDeEntrega;
     }
 
+
+    public Set<Endereco.ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<Endereco.ItemPedido> itens) {
+        this.itens = itens;
+    }
 
     @Override
     public boolean equals(Object o) {

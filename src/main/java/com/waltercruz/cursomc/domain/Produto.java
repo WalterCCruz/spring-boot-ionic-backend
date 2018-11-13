@@ -1,13 +1,10 @@
 package com.waltercruz.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Produto implements Serializable {
@@ -33,6 +30,9 @@ public class Produto implements Serializable {
     private List<Categoria> categorias = new ArrayList<>();
 
 
+    /*Prorio Set me garanta que não tenha item repetido*/
+    @OneToMany(mappedBy = "id.produto")
+    private Set<Endereco.ItemPedido> itens = new HashSet<>();
 
 
     public Produto() {
@@ -88,5 +88,13 @@ public class Produto implements Serializable {
 
     public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
+    }
+
+    public Set<Endereco.ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<Endereco.ItemPedido> itens) {
+        this.itens = itens;
     }
 }
