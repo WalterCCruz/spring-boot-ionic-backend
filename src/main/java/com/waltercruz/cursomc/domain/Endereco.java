@@ -1,6 +1,7 @@
 package com.waltercruz.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -20,7 +21,8 @@ public class Endereco {
 
 
     /*@JsonBackReference Aqui estou dizendo que o endereço não pode serializaro cliente*/
-    @JsonBackReference
+    //@JsonBackReference Alterado por Json Ignore
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="cliente_id")
     private Cliente cliente;

@@ -23,7 +23,8 @@ public class Produto implements Serializable {
 
     /*Segundo a especificacao o List ficará fora do construtor*/
     /*@JsonBackReference ele irá omitir a lista de categorias para cada produto*/
-    @JsonBackReference
+    //@JsonBackReference Alterado por JsonIgnore
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "PRODUTO_CATEGORIA",
             joinColumns = @JoinColumn(name = "produto_id"),

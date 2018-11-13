@@ -1,6 +1,7 @@
 package com.waltercruz.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.waltercruz.cursomc.domain.Enums.TipoCliente;
 
@@ -21,7 +22,7 @@ public class Cliente {
     private Integer tipo;
 
     /*@JsonManagedReference serve para tratar a referencia ciclica - ir na cliente pegar os enderecos, ir nos enderecos e pegar os clientes em loop*/
-    @JsonManagedReference
+    //@JsonManagedReference   Alterado do outro lado por JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Endereco>enderecos = new ArrayList<>();
 
@@ -34,7 +35,8 @@ public class Cliente {
     private Set<String>telefones = new HashSet<>();
 
     /*Os pedidos de um cliente nao serao serializados - tratamento referencia ciclica*/
-    @JsonBackReference
+    //@JsonBackReference  Alterado para JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos =  new ArrayList<>();
 

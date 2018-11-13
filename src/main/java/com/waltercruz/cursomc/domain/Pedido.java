@@ -21,12 +21,12 @@ public class Pedido implements Serializable {
     private Date instant;
 
     /*Tratamento referencia ciclica -  permito que o pagamento seja serializado*/
-    @JsonManagedReference
+   // @JsonManagedReference  Alterado do outro lado por JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
     private Pagamento pagamento;
 
     /*Tratamento referencia ciclica*/
-    @JsonManagedReference
+    //@JsonManagedReference Alterado do outro lado por JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
