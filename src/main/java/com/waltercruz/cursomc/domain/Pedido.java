@@ -1,5 +1,7 @@
 package com.waltercruz.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -14,6 +16,7 @@ public class Pedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     private Date instant;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
@@ -29,18 +32,7 @@ public class Pedido implements Serializable {
 
     /*Prorio Set me garanta que não tenha item repetido*/
     @OneToMany(mappedBy = "id.pedido")
-    private Set<Endereco.ItemPedido> itens = new HashSet<>();
-
-
-    public List<Pedido>getPedidos(){
-        List<Pedido> list =  new ArrayList<>();
-        for(Endereco.ItemPedido x : itens){
-            list.add(x.getPedido());
-        }
-        return list;
-    }
-
-
+    private Set<ItemPedido> itens = new HashSet<>();
 
     public Pedido (){
 
@@ -49,6 +41,7 @@ public class Pedido implements Serializable {
 
     /*Retirado pagamento do construtor para que seja possivel instaciar o pagamento de forma individual ao pedido*/
     public Pedido(Integer id, Date instant, Cliente cliente, Endereco enderecoDeEntrega) {
+        super();
         this.id = id;
         this.instant = instant;
         this.cliente = cliente;
@@ -97,24 +90,36 @@ public class Pedido implements Serializable {
     }
 
 
-    public Set<Endereco.ItemPedido> getItens() {
+    public Set<ItemPedido> getItens() {
         return itens;
     }
 
-    public void setItens(Set<Endereco.ItemPedido> itens) {
+    public void setItens(Set<ItemPedido> itens) {
         this.itens = itens;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pedido pedido = (Pedido) o;
-        return Objects.equals(id, pedido.id);
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Pedido other = (Pedido) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
     }
 }
