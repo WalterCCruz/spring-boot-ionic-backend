@@ -1,5 +1,6 @@
 package com.waltercruz.cursomc.resources;
 
+import com.waltercruz.cursomc.DTO.CategoriaDTO;
 import com.waltercruz.cursomc.services.CategoriaService;
 import com.waltercruz.cursomc.domain.Categoria;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 /* O RestController serializa o objeto para que a resposta seja exibida, tornando disponsável o uso do @ResponseBody no método que irá retornar*/
@@ -47,6 +50,14 @@ public class CategoriaResource {
         categoriaService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<CategoriaDTO>> findAll() {
+        List<Categoria> list = categoriaService.findAll();
+        List<CategoriaDTO>listDTO = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDTO);
+    }
+
 
 
 }
