@@ -1,12 +1,16 @@
 package com.waltercruz.cursomc.services;
 
 
+import com.sun.javafx.scene.traversal.Direction;
 import com.waltercruz.cursomc.services.exception.DataIntegrityException;
 import com.waltercruz.cursomc.services.exception.ObjectNotFoundException;
 import com.waltercruz.cursomc.domain.Categoria;
 import com.waltercruz.cursomc.repositories.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,5 +57,12 @@ public class CategoriaService {
     public List<Categoria>findAll(){
         return categoriaRepository.findAll();
     }
+
+    public Page<Categoria>findPage(Integer page, Integer linesPePage, String orderBy, String direction){
+        PageRequest pageRequest = PageRequest.of(page,linesPePage, Sort.Direction.valueOf(direction),orderBy);
+        return categoriaRepository.findAll(pageRequest);
+    }
+
+
 
 }
