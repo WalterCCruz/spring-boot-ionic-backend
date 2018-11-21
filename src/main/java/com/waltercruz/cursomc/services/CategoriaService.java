@@ -1,10 +1,12 @@
 package com.waltercruz.cursomc.services;
 
 
+import com.waltercruz.cursomc.services.exception.DataIntegrityException;
 import com.waltercruz.cursomc.services.exception.ObjectNotFoundException;
 import com.waltercruz.cursomc.domain.Categoria;
 import com.waltercruz.cursomc.repositories.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -32,6 +34,17 @@ public class CategoriaService {
     public Categoria update (Categoria obj){
         find(obj.getId());
         return categoriaRepository.save(obj);
+
+    }
+
+
+    public void delete (Integer id){
+        find(id);
+        try {
+            categoriaRepository.deleteById(id);
+        }catch (DataIntegrityViolationException e){
+            throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos.");
+        }
 
     }
 
