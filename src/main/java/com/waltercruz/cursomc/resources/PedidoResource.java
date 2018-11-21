@@ -23,8 +23,8 @@ public class PedidoResource {
     /*PathVariable é a variável que virá da URL conforme o parametro solciitado acima no RequestMapping */
     /*Response Entity já encapusla o meu objeto, dispensando a necessidade de constuir uma classe de ResponseCategoria*/
     @RequestMapping(value= "/{id}",method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Integer id) {
-        Pedido obj = categoriaService.buscar(id);
+    public ResponseEntity<Pedido> find(@PathVariable Integer id) {
+        Pedido obj = categoriaService.find(id);
         return ResponseEntity.ok().body(obj);
     }
 
