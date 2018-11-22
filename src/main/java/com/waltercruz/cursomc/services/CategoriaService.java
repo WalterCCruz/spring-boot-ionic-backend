@@ -2,6 +2,7 @@ package com.waltercruz.cursomc.services;
 
 
 import com.sun.javafx.scene.traversal.Direction;
+import com.waltercruz.cursomc.DTO.CategoriaDTO;
 import com.waltercruz.cursomc.services.exception.DataIntegrityException;
 import com.waltercruz.cursomc.services.exception.ObjectNotFoundException;
 import com.waltercruz.cursomc.domain.Categoria;
@@ -63,6 +64,10 @@ public class CategoriaService {
         return categoriaRepository.findAll(pageRequest);
     }
 
+
+    public Categoria fromDTO (CategoriaDTO objetoDto){
+        return new Categoria(objetoDto.getId(),objetoDto.getNome());
+    }
 
 
 }
