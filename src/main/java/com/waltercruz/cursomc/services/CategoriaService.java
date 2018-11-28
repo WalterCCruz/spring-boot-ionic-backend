@@ -38,8 +38,10 @@ public class CategoriaService {
 
     /*Categoria valendo null insere se já estiver preenchido id é realizada a edicao*/
     public Categoria update (Categoria obj){
-        find(obj.getId());
-        return categoriaRepository.save(obj);
+        Categoria newObj = find(obj.getId());
+        updateData(newObj , obj);
+        return categoriaRepository.save(newObj);
+
 
     }
 
@@ -67,6 +69,12 @@ public class CategoriaService {
 
     public Categoria fromDTO (CategoriaDTO objetoDto){
         return new Categoria(objetoDto.getId(),objetoDto.getNome());
+    }
+
+
+    private void updateData (Categoria newObj, Categoria obj){
+        newObj.setNome(obj.getNome());
+
     }
 
 
