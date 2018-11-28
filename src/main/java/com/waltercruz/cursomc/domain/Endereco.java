@@ -18,6 +18,7 @@ public class Endereco {
     private String numero;
     private String complemento;
     private String cep;
+    private String bairro;
 
 
     /*@JsonBackReference Aqui estou dizendo que o endereço não pode serializaro cliente*/
@@ -38,14 +39,17 @@ public class Endereco {
 
 
 
-    public Endereco(Integer id, String logradouro, String numero, String complemento, String cep, Cliente cliente, Cidade cidade ) {
+    public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
+                    Cliente cliente, Cidade cidade) {
+        super();
         this.id = id;
         this.logradouro = logradouro;
         this.numero = numero;
         this.complemento = complemento;
+        this.bairro = bairro;
         this.cep = cep;
         this.cliente = cliente;
-        this.cidade = cidade;
+        this.setCidade(cidade);
     }
 
 
@@ -105,6 +109,13 @@ public class Endereco {
         this.cidade = cidade;
     }
 
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
 
     @Override
     public boolean equals(Object o) {

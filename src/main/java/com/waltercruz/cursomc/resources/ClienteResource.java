@@ -1,6 +1,7 @@
 package com.waltercruz.cursomc.resources;
 
 import com.waltercruz.cursomc.DTO.ClienteDTO;
+import com.waltercruz.cursomc.DTO.ClienteNewDTO;
 import com.waltercruz.cursomc.domain.Cliente;
 import com.waltercruz.cursomc.domain.Cliente;
 import com.waltercruz.cursomc.services.ClienteService;
@@ -9,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,6 +68,16 @@ public class ClienteResource {
         Page<Cliente> list = clienteService.findPage(page, linesPerPage, orderBy, direction);
         Page<ClienteDTO> listDTO = list.map(obj -> new ClienteDTO(obj));
         return ResponseEntity.ok().body(listDTO);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    /*@RequestBody esta annotation permite que vc transforme seu json automaticamente para seu objeto de domain (entidade)*/
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objdto) {
+        Cliente obj = clienteService.fromDTO(objdto);
+        obj = clienteService.insert(obj);
+        /*Neste trecho estou associando para URL o id criado para o novo objeto e já atribuindo o seu direcionamento*/
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
 

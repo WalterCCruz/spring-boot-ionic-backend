@@ -95,16 +95,16 @@ public class CursomcApplication implements CommandLineRunner {
         Cliente cli1 =  new Cliente(null,"Maria Silva","mariasilva@gmail.com","88852563697", TipoCliente.PESSOAFISICA);
         cli1.getTelefones().addAll(Arrays.asList("222222222","4564654654"));
 
-       Endereco e1 = new Endereco(null,"Rua Teste","237","casa","789798798",cli1,c1);
-       Endereco e2 = new Endereco(null,"Rua Teste2","237","casa","789798798",cli1,c1);
+//       Endereco e1 = new Endereco(null,"Rua Teste","237","casa","789798798",cli1,c1);
+//       Endereco e2 = new Endereco(null,"Rua Teste2","237","casa","789798798",cli1,c1);
 
-        cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
+       // cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-        Pedido ped1 = new Pedido(null,sdf.parse("12/11/2018 18:00"),cli1,e1);
+        Pedido ped1 = new Pedido(null,sdf.parse("12/11/2018 18:00"),cli1,null);
 
-        Pedido ped2 = new Pedido(null,sdf.parse("13/11/2018 10:00"),cli1,e2);
+        Pedido ped2 = new Pedido(null,sdf.parse("13/11/2018 10:00"),cli1,null);
 
         Pagamento pgto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO,ped1,6);
         ped1.setPagamento(pgto1);
@@ -133,7 +133,7 @@ public class CursomcApplication implements CommandLineRunner {
         categoriaRepository.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6,cat7));
         produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
         clienteRepository.saveAll(Arrays.asList(cli1));
-        enderecoRepository.saveAll(Arrays.asList(e1,e2));
+        //enderecoRepository.saveAll(Arrays.asList(e1,e2));
         pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
         pagamentoRepository.saveAll(Arrays.asList(pgto1,pgto2));
         itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
