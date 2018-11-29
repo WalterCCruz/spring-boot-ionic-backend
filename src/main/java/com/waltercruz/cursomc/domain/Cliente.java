@@ -23,7 +23,7 @@ public class Cliente {
 
     /*@JsonManagedReference serve para tratar a referencia ciclica - ir na cliente pegar os enderecos, ir nos enderecos e pegar os clientes em loop*/
     //@JsonManagedReference   Alterado do outro lado por JsonIgnore
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco>enderecos = new ArrayList<>();
 
 
