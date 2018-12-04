@@ -4,6 +4,7 @@ import com.waltercruz.cursomc.DTO.CategoriaDTO;
 import com.waltercruz.cursomc.services.CategoriaService;
 import com.waltercruz.cursomc.domain.Categoria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
