@@ -36,4 +36,6 @@ public class FieldMessage implements Serializable {
         this.fieldMessage = fieldMessage;
         this.message = message;
     }
+
+
 }
