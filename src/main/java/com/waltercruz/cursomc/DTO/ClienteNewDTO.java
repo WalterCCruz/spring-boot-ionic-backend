@@ -26,7 +26,7 @@ public class ClienteNewDTO {
 
     private Integer tipo;
 
-    @NotEmpty(message = "Preenchimento obrigatório")
+   // @NotEmpty(message = "Preenchimento obrigatório")
     private String senha;
 
     @NotEmpty(message = "Preenchimento obrigatório")
