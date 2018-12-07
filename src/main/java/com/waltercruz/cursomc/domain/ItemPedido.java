@@ -23,6 +23,13 @@ public class ItemPedido {
     private Double preco;
 
 
+
+    /*só de usar o get na frente do nome do metodo o Json já exibe o resultado do return*/
+    public double getSubTotal(){
+        return (preco - desconto) * quantidade;
+    }
+
+
     public ItemPedido (){
 
     }

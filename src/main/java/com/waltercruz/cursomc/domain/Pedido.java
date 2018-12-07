@@ -39,6 +39,16 @@ public class Pedido implements Serializable {
     @OneToMany(mappedBy = "id.pedido")
     private Set<ItemPedido> itens = new HashSet<>();
 
+    /*só de usar o get na frente do nome do metodo o Json já exibe o resultado do return*/
+    public double getValortotal(){
+        double soma = 0.0;
+        for (ItemPedido ip : itens){
+            soma = soma + ip.getSubTotal();
+        }
+        return soma;
+    }
+
+
     public Pedido (){
 
     }
