@@ -1,5 +1,7 @@
 package com.waltercruz.cursomc.DTO;
 
+import com.waltercruz.cursomc.domain.Produto;
+
 public class ProdutoDTO {
 
     private static final long serialVersionUID = 1L;
@@ -11,6 +13,14 @@ public class ProdutoDTO {
     private Double valor;
 
     public ProdutoDTO(){
+
+    }
+
+
+    public ProdutoDTO(Produto obj){
+        id = obj.getId();
+        nome = obj.getNome();
+        valor = obj.getValor();
 
     }
 
