@@ -2,12 +2,15 @@ package com.waltercruz.cursomc.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.waltercruz.cursomc.domain.Enums.EstadoPagamento;
 
 import javax.persistence.Entity;
 import java.util.Date;
 
 @Entity
+/*passando o nome da classe para o meu Json*/
+@JsonTypeName("pagamentocomboleto")
 public class PagamentoComBoleto extends Pagamento {
 
     private static final long serialVersionUID = 1L;

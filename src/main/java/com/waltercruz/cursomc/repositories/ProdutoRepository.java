@@ -24,7 +24,6 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
     /* Este método faz a mesma coisa que o de cima, porém utilizando o Spring Data seguindo os padroes de nomenclatura*/
     Page<Produto>findDistinctByNomeContainingAndCategoriasIn(String nome, List<Categoria> categorias, Pageable pageRequest);
 
-
 }
 
 

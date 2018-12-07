@@ -2,6 +2,7 @@ package com.waltercruz.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.waltercruz.cursomc.domain.Enums.EstadoPagamento;
 
 import javax.persistence.*;
@@ -11,6 +12,8 @@ import java.util.Objects;
 /*Inheritance mapeamento e herança da superclasse*/
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+/*Adicionando um campo adicional ao Json @Type*/
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public  abstract class Pagamento {
 
     private static final long serialVersionUID = 1L;
