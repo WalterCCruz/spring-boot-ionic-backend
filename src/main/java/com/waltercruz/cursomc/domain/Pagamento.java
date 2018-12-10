@@ -1,6 +1,6 @@
 package com.waltercruz.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.waltercruz.cursomc.domain.Enums.EstadoPagamento;

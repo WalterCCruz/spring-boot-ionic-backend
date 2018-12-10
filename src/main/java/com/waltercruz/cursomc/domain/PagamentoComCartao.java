@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 
 @Entity
 /*passando o nome da classe para o meu Json*/
-@JsonTypeName("pagamentocomcartao")
+@JsonTypeName("pagamentoComCartao")
 public class PagamentoComCartao extends Pagamento{
 
     private static final long serialVersionUID = 1L;

@@ -129,8 +129,8 @@ public class CursomcApplication implements CommandLineRunner {
         Cliente cli1 =  new Cliente(null,"Maria Silva","mariasilva@gmail.com","88852563697", TipoCliente.PESSOAFISICA);
         cli1.getTelefones().addAll(Arrays.asList("222222222","4564654654"));
 
-//       Endereco e1 = new Endereco(null,"Rua Teste","237","casa","789798798",cli1,c1);
-//       Endereco e2 = new Endereco(null,"Rua Teste2","237","casa","789798798",cli1,c1);
+       Endereco e1 = new Endereco(null,"rua1","100","teste","teste","070-8555",cli1,c1);
+       Endereco e2 = new Endereco(null,"rua1","100","teste","teste","070-8555",cli1,c1);
 
        // cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
 
@@ -167,7 +167,7 @@ public class CursomcApplication implements CommandLineRunner {
         categoriaRepository.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6,cat7));
         produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
         clienteRepository.saveAll(Arrays.asList(cli1));
-        //enderecoRepository.saveAll(Arrays.asList(e1,e2));
+        enderecoRepository.saveAll(Arrays.asList(e1,e2));
         pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
         pagamentoRepository.saveAll(Arrays.asList(pgto1,pgto2));
         itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
