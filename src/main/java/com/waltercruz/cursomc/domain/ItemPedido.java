@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 @Entity
@@ -23,14 +25,13 @@ public class ItemPedido {
     private Double preco;
 
 
-
     /*só de usar o get na frente do nome do metodo o Json já exibe o resultado do return*/
-    public double getSubTotal(){
+    public double getSubTotal() {
         return (preco - desconto) * quantidade;
     }
 
 
-    public ItemPedido (){
+    public ItemPedido() {
 
     }
 
@@ -45,24 +46,24 @@ public class ItemPedido {
 
 
     @JsonIgnore
-    public Pedido getPedido(){
+    public Pedido getPedido() {
         return id.getPedido();
     }
 
 
-    public void setPedido(Pedido pedido){
+    public void setPedido(Pedido pedido) {
         id.setPedido(pedido);
     }
 
-    public void setProduto(Produto produto){
+    public void setProduto(Produto produto) {
         id.setProduto(produto);
     }
 
-    public Produto getProduto(){
+    public Produto getProduto() {
         return id.getProduto();
     }
 
-    public ItemPedidoPK getId(){
+    public ItemPedidoPK getId() {
         return id;
     }
 
@@ -119,5 +120,24 @@ public class ItemPedido {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+
+    @Override
+    public String toString() {
+
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
+        StringBuilder builder = new StringBuilder();
+        builder.append(getProduto().getNome());
+        builder.append(", Qte:");
+        builder.append(getQuantidade());
+        builder.append(", Preco Unitario");
+        builder.append(getPreco());
+        builder.append(", Subtotal");
+        builder.append(nf.format(getSubTotal()));
+        builder.append(", Subtotal");
+        builder.append("\n");
+        return builder.toString();
+
     }
 }

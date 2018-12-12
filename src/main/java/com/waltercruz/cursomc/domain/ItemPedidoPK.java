@@ -52,4 +52,8 @@ public class ItemPedidoPK implements Serializable {
     public int hashCode() {
         return Objects.hash(pedido, produto);
     }
+
+
+
+
 }
