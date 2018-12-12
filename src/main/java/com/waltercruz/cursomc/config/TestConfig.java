@@ -2,6 +2,8 @@ package com.waltercruz.cursomc.config;
 
 
 import com.waltercruz.cursomc.services.DBService;
+import com.waltercruz.cursomc.services.EmailService;
+import com.waltercruz.cursomc.services.MockEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +26,13 @@ public class TestConfig {
         return true;
 
     }
+
+
+    public EmailService emailService(){
+        return new MockEmailService();
+    }
+
+
 
 
 }
