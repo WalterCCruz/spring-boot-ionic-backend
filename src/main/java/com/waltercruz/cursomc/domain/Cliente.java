@@ -3,10 +3,12 @@ package com.waltercruz.cursomc.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.waltercruz.cursomc.domain.Enums.Perfil;
 import com.waltercruz.cursomc.domain.Enums.TipoCliente;
 
 import javax.persistence.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 public class Cliente {
@@ -46,9 +48,14 @@ public class Cliente {
     @JsonIgnore
     private String senha;
 
+    /*fetch=FetchType.EAGER estou garantindo que os perfis virao com os clientes quando consultado*/
+    @ElementCollection(fetch=FetchType.EAGER)
+    @CollectionTable(name = "PERFIS")
+    private Set<Integer> perfis = new HashSet<>();
+
 
     public Cliente(){
-
+        addPerfil(Perfil.CLIENTE);
     }
 
     public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
@@ -58,6 +65,7 @@ public class Cliente {
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipo = (tipo == null) ? null : tipo.getCod();/*ternario*/
+        addPerfil(Perfil.CLIENTE);
     }
 
     public List<Pedido> getPedidos() {
@@ -132,6 +140,15 @@ public class Cliente {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public Set<Perfil>getPerfis(){
+        return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+    }
+
+    public void addPerfil(Perfil perfil){
+        perfis.add(perfil.getCod());
+    }
+
 
     @Override
     public boolean equals(Object o) {
