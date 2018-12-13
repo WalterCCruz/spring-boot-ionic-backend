@@ -5,6 +5,7 @@ import com.waltercruz.cursomc.domain.Enums.EstadoPagamento;
 import com.waltercruz.cursomc.domain.Enums.TipoCliente;
 import com.waltercruz.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -42,6 +43,10 @@ public class DBService {
 
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
+
+
+    @Autowired
+    private BCryptPasswordEncoder pe;
 
 
 
@@ -110,7 +115,7 @@ public class DBService {
         p7.getCategorias().addAll(Arrays.asList(cat4));
         p8.getCategorias().addAll(Arrays.asList(cat5));
         p9.getCategorias().addAll(Arrays.asList(cat6));
-        p10.getCategorias().addAll(Arrays.asList(cat6));
+        p10.getCategorias().addAll(Arrays.asList(cat7));
         p11.getCategorias().addAll(Arrays.asList(cat7));
 
         est1.getCidades().addAll(Arrays.asList(c1));
@@ -120,7 +125,8 @@ public class DBService {
 
 
 
-        Cliente cli1 =  new Cliente(null,"Maria Silva","wccruzcontaprofissional@gmail.com","88852563697", TipoCliente.PESSOAFISICA);
+        Cliente cli1 =  new Cliente(null,"Maria Silva","wccruzcontaprofissional@gmail.com","88852563697",
+                TipoCliente.PESSOAFISICA,pe.encode("teste"));
         cli1.getTelefones().addAll(Arrays.asList("222222222","4564654654"));
 
         Endereco e1 = new Endereco(null,"rua1","100","teste","teste","070-8555",cli1,c1);

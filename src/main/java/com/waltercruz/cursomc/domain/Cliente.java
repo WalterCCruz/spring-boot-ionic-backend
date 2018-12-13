@@ -43,15 +43,17 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos =  new ArrayList<>();
 
-
+    @JsonIgnore
+    private String senha;
 
 
     public Cliente(){
 
     }
 
-    public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
+    public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
         this.id = id;
+        this.senha = senha;
         this.nome = nome;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
@@ -120,6 +122,15 @@ public class Cliente {
 
     public void setTelefones(Set<String> telefones) {
         this.telefones = telefones;
+    }
+
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     @Override

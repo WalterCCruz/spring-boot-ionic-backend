@@ -2,9 +2,6 @@ package com.waltercruz.cursomc.DTO;
 
 import com.waltercruz.cursomc.services.validation.ClienteInsert;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.br.CNPJ;
-import org.hibernate.validator.constraints.br.CPF;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -26,7 +23,7 @@ public class ClienteNewDTO {
 
     private Integer tipo;
 
-   // @NotEmpty(message = "Preenchimento obrigatório")
+    @NotEmpty(message = "Preenchimento obrigatório")
     private String senha;
 
     @NotEmpty(message = "Preenchimento obrigatório")

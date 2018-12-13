@@ -22,11 +22,16 @@ public class ClienteDTO  implements Serializable {
     @Email(message = "email invalido")
     private String email;
 
+    @NotEmpty(message = "Preenchimento obrigatorio")
+    private String senha;
+
+
 
     public ClienteDTO(Cliente obj){
         id = obj.getId();
         nome = obj.getNome();
         email = obj.getEmail();
+        senha = obj.getSenha();
     }
 
 
@@ -52,6 +57,14 @@ public class ClienteDTO  implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public ClienteDTO(){

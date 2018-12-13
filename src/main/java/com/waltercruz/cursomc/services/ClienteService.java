@@ -5,10 +5,8 @@ import com.waltercruz.cursomc.DTO.ClienteDTO;
 import com.waltercruz.cursomc.DTO.ClienteNewDTO;
 import com.waltercruz.cursomc.domain.Cidade;
 import com.waltercruz.cursomc.domain.Cliente;
-import com.waltercruz.cursomc.domain.Cliente;
 import com.waltercruz.cursomc.domain.Endereco;
 import com.waltercruz.cursomc.domain.Enums.TipoCliente;
-import com.waltercruz.cursomc.repositories.CidadeRepository;
 import com.waltercruz.cursomc.repositories.ClienteRepository;
 import com.waltercruz.cursomc.repositories.EnderecoRepository;
 import com.waltercruz.cursomc.services.exception.DataIntegrityException;
@@ -18,6 +16,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -31,10 +30,11 @@ public class ClienteService {
     private ClienteRepository clienteRepository;
 
     @Autowired
-    private CidadeRepository cidadeRepository;
+    private EnderecoRepository enderecoRepository;
+
 
     @Autowired
-    private EnderecoRepository enderecoRepository;
+    private BCryptPasswordEncoder pe;
 
 
     public Cliente find(Integer id) {
@@ -84,12 +84,12 @@ public class ClienteService {
 
 
     public Cliente fromDTO(ClienteDTO objetoDto) {
-        return new Cliente(objetoDto.getId(), objetoDto.getNome(), objetoDto.getEmail(), null, null);
+        return new Cliente(objetoDto.getId(), objetoDto.getNome(), objetoDto.getEmail(), null, null,null);
     }
 
     public Cliente fromDTO(ClienteNewDTO objetoDto) {
         Cliente cli = new Cliente(null, objetoDto.getNome(), objetoDto.getEmail(), objetoDto.getCpfOuCnpj(),
-        TipoCliente.toEnum(objetoDto.getTipo()));
+        TipoCliente.toEnum(objetoDto.getTipo()),pe.encode(objetoDto.getSenha()));
 
         Cidade cid = new Cidade(objetoDto.getCidadeId(), null, null);
 
