@@ -1,6 +1,9 @@
 package com.waltercruz.cursomc.config;
 
+import com.waltercruz.cursomc.domain.Security.JWTAuthenticationFilter;
+import com.waltercruz.cursomc.domain.Security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -9,6 +12,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
@@ -28,6 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+
+    @Autowired
+    JWTUtil JWTUtil;
 
 
     private static final String[] PUBLIC_MATCHERS = {
@@ -59,6 +66,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS).permitAll()
                 .antMatchers(PUBLIC_MATCHERS_GET).permitAll()
                 .anyRequest().authenticated();
+
+        http.addFilter(new JWTAuthenticationFilter(authenticationManager(), JWTUtil));
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
     }
 
 
@@ -79,6 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 
 
 

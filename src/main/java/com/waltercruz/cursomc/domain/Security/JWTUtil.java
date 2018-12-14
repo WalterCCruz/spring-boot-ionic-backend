@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
-public class JwtUtil {
+public class JWTUtil {
 
     @Value("${jwt.secret}")
     private String secret;
@@ -17,11 +17,11 @@ public class JwtUtil {
     @Value("${jwt.expiration}")
     private Long expiration;
 
-    public String generateToken(String userName){
+    public String generateToken(String userName) {
         return Jwts.builder().
                 setSubject(userName).
                 setExpiration(new Date(System.currentTimeMillis() + expiration))/*Pegando o tempo de expiracao expiration do properties*/
-                .signWith(SignatureAlgorithm.HS512,secret.getBytes())/*Aqui estou criptografando com SignatureAlgorithm.HS512 + secret do properties*/
+                .signWith(SignatureAlgorithm.HS512, secret.getBytes())/*Aqui estou criptografando com SignatureAlgorithm.HS512 + secret do properties*/
                 .compact();
     }
 
