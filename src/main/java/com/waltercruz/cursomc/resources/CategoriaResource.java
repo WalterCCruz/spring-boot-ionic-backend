@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -32,6 +33,18 @@ public class CategoriaResource {
         return ResponseEntity.ok().body(obj);
     }
 
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<CategoriaDTO>> findAll() {
+        List<Categoria> list = categoriaService.findAll();
+        /*Esta utilizsacao do DTO serve para que nao traga informacoes desnecessarias atraladas a categoria para este metodo ex: produtos
+         * Com a utilizacao do lambda nao necessito realizar o for no DTO/Response para realizar a varredura e conversao das listas de Categoria
+         * para CateGoriaDTO*/
+        List<CategoriaDTO> listDTO = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDTO);
+    }
+
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping(method = RequestMethod.POST)
     /*@RequestBody esta annotation permite que vc transforme seu json automaticamente para seu objeto de domain (entidade)*/
     public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objdto) {
@@ -42,6 +55,7 @@ public class CategoriaResource {
         return ResponseEntity.created(uri).build();
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id) {
         obj.setId(id);
@@ -49,20 +63,11 @@ public class CategoriaResource {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         categoriaService.delete(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<CategoriaDTO>> findAll() {
-        List<Categoria> list = categoriaService.findAll();
-        /*Esta utilizsacao do DTO serve para que nao traga informacoes desnecessarias atraladas a categoria para este metodo ex: produtos
-         * Com a utilizacao do lambda nao necessito realizar o for no DTO/Response para realizar a varredura e conversao das listas de Categoria
-         * para CateGoriaDTO*/
-        List<CategoriaDTO> listDTO = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
-        return ResponseEntity.ok().body(listDTO);
     }
 
 
