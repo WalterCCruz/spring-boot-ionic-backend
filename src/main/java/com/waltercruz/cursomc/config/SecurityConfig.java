@@ -1,6 +1,7 @@
 package com.waltercruz.cursomc.config;
 
 import com.waltercruz.cursomc.domain.Security.JWTAuthenticationFilter;
+import com.waltercruz.cursomc.domain.Security.JWTAuthorizationFilter;
 import com.waltercruz.cursomc.domain.Security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
@@ -68,6 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
 
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), JWTUtil));
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), JWTUtil, userDetailsService));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
     }
