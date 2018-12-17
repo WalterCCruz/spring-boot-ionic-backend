@@ -1,5 +1,6 @@
 package com.waltercruz.cursomc.resources.exception;
 
+import com.waltercruz.cursomc.services.exception.AuthorizationException;
 import com.waltercruz.cursomc.services.exception.DataIntegrityException;
 import com.waltercruz.cursomc.services.exception.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -46,6 +47,14 @@ public class ResourceExceptionHandler {
 
     }
 
+
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<StandardError> authorization(ObjectNotFoundException e, HttpServletRequest request){
+
+        StandardError err = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
+
+    }
 
 
 

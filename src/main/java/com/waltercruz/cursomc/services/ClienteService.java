@@ -6,9 +6,12 @@ import com.waltercruz.cursomc.DTO.ClienteNewDTO;
 import com.waltercruz.cursomc.domain.Cidade;
 import com.waltercruz.cursomc.domain.Cliente;
 import com.waltercruz.cursomc.domain.Endereco;
+import com.waltercruz.cursomc.domain.Enums.Perfil;
 import com.waltercruz.cursomc.domain.Enums.TipoCliente;
+import com.waltercruz.cursomc.domain.Security.UserSS;
 import com.waltercruz.cursomc.repositories.ClienteRepository;
 import com.waltercruz.cursomc.repositories.EnderecoRepository;
+import com.waltercruz.cursomc.services.exception.AuthorizationException;
 import com.waltercruz.cursomc.services.exception.DataIntegrityException;
 import com.waltercruz.cursomc.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +41,12 @@ public class ClienteService {
 
 
     public Cliente find(Integer id) {
+
+        UserSS user = UserService.authenticated();
+        if(user == null || user.hasRole(Perfil.ADMIN) && id.equals(user.getId())){
+            throw new AuthorizationException("Acesso negado");
+        }
+
         Optional<Cliente> obj = clienteRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
