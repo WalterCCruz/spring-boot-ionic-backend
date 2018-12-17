@@ -1,16 +1,22 @@
 package com.waltercruz.cursomc.services;
 
 
+import com.waltercruz.cursomc.domain.Cliente;
 import com.waltercruz.cursomc.domain.Enums.EstadoPagamento;
 import com.waltercruz.cursomc.domain.ItemPedido;
 import com.waltercruz.cursomc.domain.PagamentoComBoleto;
 import com.waltercruz.cursomc.domain.Pedido;
+import com.waltercruz.cursomc.domain.Security.UserSS;
 import com.waltercruz.cursomc.repositories.ClienteRepository;
 import com.waltercruz.cursomc.repositories.ItemPedidoRepository;
 import com.waltercruz.cursomc.repositories.PagamentoRepository;
 import com.waltercruz.cursomc.repositories.PedidoRepository;
+import com.waltercruz.cursomc.services.exception.AuthorizationException;
 import com.waltercruz.cursomc.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -46,8 +52,6 @@ public class PedidoService {
     private EmailService emailService;
 
 
-
-
     public Pedido find(Integer id) {
         Optional<Pedido> obj = pedidoRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -78,4 +82,17 @@ public class PedidoService {
         emailService.sendOrderConfirmationHtmlEmail(obj);
         return obj;
     }
+
+    public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        UserSS user = UserService.authenticated();
+        if (user == null) {
+            throw new AuthorizationException("Acesso negado");
+        }
+        /*Retornando somente os pedidos do cliente que esta logado*/
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        Cliente cliente = clienteService.find(user.getId());
+        return pedidoRepository.findByCliente(cliente, pageRequest);
+    }
+
+
 }
