@@ -43,7 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] PUBLIC_MATCHERS = {
             "/h2-console/**",
             "/produtos/**",
-            "/categorias/**"
+            "/categorias/**",
+
     };
 
     private static final String[] PUBLIC_MATCHERS_GET = {
@@ -51,6 +52,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/produtos/**",
             "/categorias/**",
             "/clientes/**"
+    };
+
+    private static final String[] PUBLIC_MATCHERS_POST = {
+            "/clientes/**",
+            "/auth/forgot/**"
     };
 
 
@@ -68,6 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS).permitAll()
                 .antMatchers(PUBLIC_MATCHERS_GET).permitAll()
+                .antMatchers(PUBLIC_MATCHERS_POST).permitAll()
                 .anyRequest().authenticated();
 
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), JWTUtil));
