@@ -34,8 +34,8 @@ public class S3Service {
         } catch (AmazonServiceException e) {
             LOG.info("AmazonServiceException:" + e.getErrorMessage());
             LOG.info("Status code:" + e.getErrorCode());
-        } catch (AmazonClientException e){
-            LOG.info("AmazonClientException: "+e.getMessage());
+        } catch (AmazonClientException e) {
+            LOG.info("AmazonClientException: " + e.getMessage());
         }
 
 
