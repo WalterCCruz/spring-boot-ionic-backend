@@ -58,6 +58,10 @@ public class Cliente {
         addPerfil(Perfil.CLIENTE);
     }
 
+    private String imageUrl;
+
+
+
     public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
         this.id = id;
         this.senha = senha;
@@ -149,6 +153,14 @@ public class Cliente {
         perfis.add(perfil.getCod());
     }
 
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     @Override
     public boolean equals(Object o) {
