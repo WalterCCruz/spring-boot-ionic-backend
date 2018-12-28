@@ -11,11 +11,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-
 /* CommandLineRunner Executar a instanciação no momento que a app iniciar*/
 @SpringBootApplication
 public class CursomcApplication implements CommandLineRunner {
-
 
 
     @Autowired
@@ -27,6 +25,8 @@ public class CursomcApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        s3Service.uploadFile("C:\\teste2.png");
+        /*forma manual teste para subir o arquivo
+        s3Service.uploadFile("C:\\teste2.png");*/
+
     }
 }

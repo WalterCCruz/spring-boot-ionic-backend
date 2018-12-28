@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -80,6 +81,14 @@ public class ClienteResource {
         return ResponseEntity.created(uri).build();
     }
 
+
+
+    @RequestMapping(value = "/picture",method = RequestMethod.POST)
+    /*@RequestBody esta annotation permite que vc transforme seu json automaticamente para seu objeto de domain (entidade)*/
+    public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name = "file")MultipartFile file) {
+        URI uri = clienteService.uploadProfilePicture(file);
+        return ResponseEntity.created(uri).build();
+    }
 
 
 
