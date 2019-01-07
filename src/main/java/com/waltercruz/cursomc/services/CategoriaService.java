@@ -1,7 +1,6 @@
 package com.waltercruz.cursomc.services;
 
 
-import com.sun.javafx.scene.traversal.Direction;
 import com.waltercruz.cursomc.DTO.CategoriaDTO;
 import com.waltercruz.cursomc.services.exception.DataIntegrityException;
 import com.waltercruz.cursomc.services.exception.ObjectNotFoundException;
@@ -28,7 +27,7 @@ public class CategoriaService {
         Optional<Categoria> obj = categoriaRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
-    }
+}
 
 
     public Categoria insert (Categoria obj){

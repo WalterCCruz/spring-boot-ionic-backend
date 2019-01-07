@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
 
-    /*Somente fazendo um metodo com otipo de retorno e a nomenclatura pardao findByEmail o springdata já interpreta que
+    /*Somente fazendo um metodo com o tipo de retorno e a nomenclatura pardao findByEmail o springdata já interpreta que
     preciso de um metodo de busca pelo campo especifico
      */
     @Transactional(readOnly = true)
