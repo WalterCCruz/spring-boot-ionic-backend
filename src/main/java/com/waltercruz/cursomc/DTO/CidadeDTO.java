@@ -18,14 +18,12 @@ public class CidadeDTO implements Serializable {
 
     }
 
-    public CidadeDTO(Cidade cidade){
-
-    }
 
 
-    public CidadeDTO(Integer id, String nome) {
-        this.id = id;
-        this.nome = nome;
+
+    public CidadeDTO(Cidade obj) {
+        id = obj.getId();
+        nome = obj.getNome();
 
     }
 
