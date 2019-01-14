@@ -25,7 +25,7 @@ public class URL {
         String[] vet = s.split(",");
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < vet.length; i++) {
-            list.add(Integer.parseInt(vet[1]));
+            list.add(Integer.parseInt(vet[i]));
         }
         return list;
         //mesma acao do list acima porem em lambda
