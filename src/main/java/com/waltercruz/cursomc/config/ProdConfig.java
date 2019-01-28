@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Profile;
 import java.text.ParseException;
 
 @Configuration
-@Profile("dev")
-public class DevConfig {
+@Profile("prod")
+public class ProdConfig {
 
     @Autowired
     private DBService dbService;
