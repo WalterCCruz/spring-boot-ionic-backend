@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class S3Config {
 
 
-    @Value("${jsa.aws.access_key_id}")
+    @Value("${aws.access_key_id}")
     private String awsId;
 
     @Value("${aws.secret_access_key}")
