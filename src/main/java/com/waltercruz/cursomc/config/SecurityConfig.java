@@ -4,7 +4,6 @@ import com.waltercruz.cursomc.domain.Security.JWTAuthenticationFilter;
 import com.waltercruz.cursomc.domain.Security.JWTAuthorizationFilter;
 import com.waltercruz.cursomc.domain.Security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
