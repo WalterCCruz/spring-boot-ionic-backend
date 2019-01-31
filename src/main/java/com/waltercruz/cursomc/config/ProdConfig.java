@@ -29,7 +29,6 @@ public class ProdConfig {
             dbService.instantiateDatabase();
             return false;
         }
-          dbService.instantiateDatabase();
         return true;
     }
 
